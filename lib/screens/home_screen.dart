@@ -308,40 +308,13 @@ class _HomePageState extends State<HomePage> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: <Widget>[
-                      DelayedDisplay(
-                        delay: const Duration(milliseconds: 100),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.home,
-                            color: Colors.black,
-                          ),
-                          title: Text(
-                            'Home',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.grey,
-                          ),
-                          onTap: () {
-                            Navigator.pop(context); // Close the drawer
-                          },
-                          tileColor:
-                              Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.grey[800]
-                                  : Colors.white,
-                        ),
-                      ),
+                      SizedBox(height: 8),
                       DelayedDisplay(
                         delay: const Duration(milliseconds: 200),
                         child: ListTile(
                           leading: Icon(
-                            Icons.error,
-                            color: Colors.black,
+                            Icons.warning,
+                            color: Colors.amber,
                           ),
                           title: Text(
                             'SoS',
@@ -368,12 +341,13 @@ class _HomePageState extends State<HomePage> {
                                   : Colors.white,
                         ),
                       ),
+                      SizedBox(height: 8),
                       DelayedDisplay(
                         delay: const Duration(milliseconds: 300),
                         child: ListTile(
                           leading: Icon(
                             Icons.chat,
-                            color: Colors.black,
+                            color: Colors.green,
                           ),
                           title: Text(
                             'Swasthya Sakhi',
@@ -399,6 +373,20 @@ class _HomePageState extends State<HomePage> {
                                   ? Colors.grey[800]
                                   : Colors.white,
                         ),
+                      ),
+                      SizedBox(height: 360),
+                      ListTile(
+                        title: Container(
+                          width: 60,
+                          height: 60,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/gdsc.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        tileColor: Colors.transparent,
                       ),
                     ],
                   ),

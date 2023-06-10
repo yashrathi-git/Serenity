@@ -21,6 +21,7 @@ class _JournalScreenState extends State<JournalScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Journal'),
+        backgroundColor: Colors.green,
       ),
       body: Container(
         color: Colors.grey[900],

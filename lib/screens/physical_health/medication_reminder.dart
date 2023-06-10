@@ -100,6 +100,7 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Medication Tracker'),
+        backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),

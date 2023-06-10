@@ -1,19 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class MenstrualCycleTrackerScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Menstrual Cycle Tracker'),
-//       ),
-//       body: Center(
-//         child: Text('Menstrual Cycle Tracker Screen'),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -185,7 +169,7 @@ class _MenstrualCycleTrackerScreenState
             color: Colors.white,
           ),
         ),
-        // backgroundColor: Colors.pink[400],
+        backgroundColor: Colors.deepOrange,
         actions: [
           IconButton(
             icon: const Icon(Icons.history),

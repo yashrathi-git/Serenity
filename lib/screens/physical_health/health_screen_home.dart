@@ -24,153 +24,200 @@ class MedicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reminder Screen'),
-        backgroundColor: Colors.deepPurple, // Set the app bar color
+        title: Text(
+          'Health Toolbox',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.amber[700], // Set the app bar color
+        iconTheme: IconThemeData(
+          color: Colors.black, // Set the color of the back arrow
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Card(
-              color: Colors.blueGrey, // Set the card background color
-              child: ListTile(
-                title: Text(
-                  'Medication Reminders',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white, // Set the title text color
-                  ),
+
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 16.0),
+              Card(
+                color: Colors.blueAccent, // Set the card background color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
-                subtitle: Text(
-                  'Set reminders for your medications',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70, // Set the subtitle text color
-                  ),
-                ),
-                leading: Icon(
-                  Icons.medical_services,
-                  color: Colors.white, // Set the leading icon color
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MedicationRemindersScreen(),
+                elevation: 4,
+                child: ListTile(
+                  title: Text(
+                    'Medication Reminders',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white, // Set the title text color
                     ),
-                  );
-                },
-              ),
-            ),
-            Card(
-              color: Colors.purple, // Set the card background color
-              child: ListTile(
-                title: Text(
-                  'Meditation',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white, // Set the title text color
                   ),
-                ),
-                subtitle: Text(
-                  'Meditate to relax your mind and body',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70, // Set the subtitle text color
-                  ),
-                ),
-                leading: Icon(
-                  Icons.spa,
-                  color: Colors.white, // Set the leading icon color
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MeditationScreen(),
+                  subtitle: Text(
+                    'Set reminders for your medications',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70, // Set the subtitle text color
                     ),
-                  );
-                },
+                  ),
+                  leading: Icon(
+                    Icons.medical_services,
+                    color: Colors.white, // Set the leading icon color
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white, // Set the trailing icon color
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MedicationRemindersScreen(),
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            Card(
-              color: Colors.green, // Set the card background color
-              child: ListTile(
-                title: Text(
-                  'Journal',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white, // Set the title text color
-                  ),
+              SizedBox(height: 16.0),
+              Card(
+                color: Colors.purple, // Set the card background color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
-                subtitle: Text(
-                  'Journal your thoughts and feelings',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70, // Set the subtitle text color
-                  ),
-                ),
-                leading: Icon(
-                  Icons.book,
-                  color: Colors.white, // Set the leading icon color
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => JournalScreen(),
+
+                elevation: 4,
+                child: ListTile(
+                  title: Text(
+                    'Meditation',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white, // Set the title text color
                     ),
-                  );
-                },
+                  ),
+                  subtitle: Text(
+                    'Meditate to relax your mind and body',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70, // Set the subtitle text color
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.spa,
+                    color: Colors.white, // Set the leading icon color
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white, // Set the trailing icon color
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MeditationScreen(),
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            // SizedBox(height: 16.0),
-            FutureBuilder<bool>(
-              future: _getUserGender(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.data == true) {
-                  return Card(
-                    color: Colors.deepOrange, // Set the card background color
-                    child: ListTile(
-                      title: Text(
-                        'Menstrual Cycle Tracker',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white, // Set the title text color
-                        ),
+              SizedBox(height: 16.0),
+              Card(
+                color: Colors.green, // Set the card background color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                elevation: 4,
+                child: ListTile(
+                  title: Text(
+                    'Journal',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white, // Set the title text color
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Journal your thoughts and feelings',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70, // Set the subtitle text color
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.book,
+                    color: Colors.white, // Set the leading icon color
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white, // Set the trailing icon color
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => JournalScreen(),
                       ),
-                      subtitle: Text(
-                        'Track your menstrual cycle',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white70, // Set the subtitle text color
-                        ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 16.0),
+              FutureBuilder<bool>(
+                future: _getUserGender(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data == true) {
+                    return Card(
+                      color: Colors.deepOrange, // Set the card background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
                       ),
-                      leading: Icon(
-                        Icons.calendar_today,
-                        color: Colors.white, // Set the leading icon color
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MenstrualCycleTrackerScreen(),
+                      elevation: 4,
+                      child: ListTile(
+                        title: Text(
+                          'Menstrual Cycle Tracker',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.white, // Set the title text color
                           ),
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return SizedBox();
-                }
-              },
-            ),
-          ],
+                        ),
+                        subtitle: Text(
+                          'Track your menstrual cycle',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color:
+                                Colors.white70, // Set the subtitle text color
+                          ),
+                        ),
+                        leading: Icon(
+                          Icons.calendar_today,
+                          color: Colors.white, // Set the leading icon color
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white, // Set the trailing icon color
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MenstrualCycleTrackerScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
       backgroundColor: Colors.grey[900], // Set the screen background color

@@ -35,13 +35,36 @@ class ReminderListWidget extends StatelessWidget {
               String formattedTime = _formatTime(reminder.selectedTime);
 
               return Card(
+                color: Colors.grey[900],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: ListTile(
-                  title: Text(reminder.medicationName),
+                  leading: Image.asset(
+                    'assets/images/medicines.png',
+                    width: 48,
+                    height: 48,
+                  ),
+                  title: Text(
+                    reminder.medicationName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Till: $formattedDate'),
-                      Text('Time: $formattedTime'),
+                      Text(
+                        'Till: $formattedDate',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Time: $formattedTime',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
                     ],
                   ),
                 ),

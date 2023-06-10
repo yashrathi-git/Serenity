@@ -22,74 +22,113 @@ class _JournalScreenState extends State<JournalScreen> {
       appBar: AppBar(
         title: Text('Journal'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'New Entry',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+      body: Container(
+        color: Colors.grey[900],
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                elevation: 4,
+                color: Colors.grey[800],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'New Entry',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      TextField(
+                        controller: _titleController,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          labelStyle: TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      TextField(
+                        controller: _descriptionController,
+                        style: TextStyle(color: Colors.white),
+                        maxLines: 4,
+                        decoration: InputDecoration(
+                          labelText: 'Description',
+                          labelStyle: TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'How was your mood today?',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildMoodButton(0, '😓'),
+                          _buildMoodButton(1, '😊'),
+                          _buildMoodButton(2, '😄'),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          _saveEntry(uid);
+                          _clearFields();
+                        },
+                        child: Text('Save Entry'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.pink,
+                          onPrimary: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          textStyle: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 16),
-                TextField(
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    labelText: 'Title',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 16),
-                TextField(
-                  controller: _descriptionController,
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  'How was your mood today?',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildMoodButton(0, Icons.sentiment_very_dissatisfied),
-                    _buildMoodButton(1, Icons.sentiment_satisfied),
-                    _buildMoodButton(2, Icons.sentiment_very_satisfied),
-                  ],
-                ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    _saveEntry(uid);
-                    _clearFields();
-                  },
-                  child: Text('Save Entry'),
-                ),
-              ],
+              ),
             ),
-          ),
-          SizedBox(height: 16),
-          Expanded(child: _buildEntryList(uid)),
-        ],
+            SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _buildEntryList(uid),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildMoodButton(int index, IconData icon) {
+  Widget _buildMoodButton(int index, String emoji) {
     final isSelected = index == _selectedMoodIndex;
     final color = isSelected ? Colors.blue : Colors.grey;
 
@@ -99,7 +138,11 @@ class _JournalScreenState extends State<JournalScreen> {
           _selectedMoodIndex = index;
         });
       },
-      icon: Icon(icon, color: color),
+      icon: Text(
+        emoji,
+        style: TextStyle(fontSize: 24),
+      ),
+      color: color,
     );
   }
 
@@ -155,6 +198,8 @@ class _JournalScreenState extends State<JournalScreen> {
         }
 
         return ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemCount: entries.length,
           itemBuilder: (context, index) {
             final entry = entries[index].data() as Map<String, dynamic>;
@@ -167,10 +212,40 @@ class _JournalScreenState extends State<JournalScreen> {
             final formattedDate =
                 '${dateTime.day}-${dateTime.month}-${dateTime.year}';
 
-            return ListTile(
-              title: Text('$title : $formattedDate'),
-              subtitle: Text(description),
-              trailing: _buildMoodEmoji(mood),
+            return Card(
+              elevation: 2,
+              color: Colors.grey[800],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                title: Text(
+                  '$title : $formattedDate',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  description,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+                trailing: Container(
+                  decoration: BoxDecoration(
+                    // color: Colors.black,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: EdgeInsets.all(8),
+                  child: _buildMoodEmoji(mood),
+                ),
+              ),
             );
           },
         );
@@ -179,31 +254,34 @@ class _JournalScreenState extends State<JournalScreen> {
   }
 
   Widget _buildMoodEmoji(int mood) {
-    IconData icon;
+    String emoji;
     String text;
 
     switch (mood) {
       case 0:
-        icon = Icons.sentiment_very_dissatisfied;
+        emoji = '😓';
         text = 'Bad';
         break;
       case 1:
-        icon = Icons.sentiment_satisfied;
+        emoji = '😊';
         text = 'Neutral';
         break;
       case 2:
-        icon = Icons.sentiment_very_satisfied;
+        emoji = '😄';
         text = 'Good';
         break;
       default:
-        icon = Icons.sentiment_neutral;
+        emoji = '😐';
         text = 'Unknown';
     }
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, color: Colors.grey),
+        Text(
+          emoji,
+          style: TextStyle(fontSize: 24),
+        ),
         SizedBox(width: 4),
         Text(text, style: TextStyle(color: Colors.grey)),
       ],

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 import 'medication_reminder.dart';
 
 class MedicationScreen extends StatelessWidget {
-
   final User? user = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -18,7 +16,6 @@ class MedicationScreen extends StatelessWidget {
     final bool? isFemale = userData?['isFemale'];
     return isFemale ?? false;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -70,20 +67,6 @@ class MedicationScreen extends StatelessWidget {
                   return SizedBox();
                 }
               },
-            Card(
-              child: ListTile(
-                title: Text('Menstrual Cycle Tracker'),
-                subtitle: Text('Track your menstrual cycle'),
-                leading: Icon(Icons.calendar_today),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MenstrualCycleTrackerScreen(),
-                    ),
-                  );
-                },
-              ),
             ),
           ],
         ),

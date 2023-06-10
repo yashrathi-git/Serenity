@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:serenity/screens/mental_health/mental_splash.dart';
 
 import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:serenity/screens/sos/sos_location.dart';
@@ -411,10 +412,10 @@ class _HomePageState extends State<HomePage> {
           if (index == 0) {
             // Handle home tab click
           } else if (index == 1) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => SoSPage()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MentalSplashScreen()),
+            );
           } else if (index == 2) {
             Navigator.push(
               context,

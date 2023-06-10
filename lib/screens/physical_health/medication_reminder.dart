@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MedicationRemindersScreen extends StatefulWidget {
@@ -10,6 +12,33 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   TextEditingController medicationNameController = TextEditingController();
+
+  Future<void> _uploadFormData() async {
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      // Get a reference to the Firestore collection
+      CollectionReference remindersCollection =
+          FirebaseFirestore.instance.collection('reminders');
+
+      // Create a new document in the collection
+      await remindersCollection.add({
+        'userId': currentUser?.uid,
+        'medicationName': medicationNameController.text,
+        'selectedDate': selectedDate,
+        'selectedTime': selectedTime.toString(),
+      });
+
+      // Show a success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Form data uploaded successfully')),
+      );
+    } catch (error) {
+      // Show an error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.toString())),
+      );
+    }
+  }
 
   Future<void> _openDatePicker() async {
     final DateTime? picked = await showDatePicker(
@@ -148,39 +177,6 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                   onTap: _openDatePicker,
                 ),
               ),
-              SizedBox(height: 16.0),
-              Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  title: Text(
-                    'Reminder Time',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        selectedTime == null
-                            ? 'Select time'
-                            : 'Time: ${selectedTime!.format(context)}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Tap to select time',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  trailing: Icon(Icons.access_time),
-                  onTap: _openTimePicker,
-                ),
-              ),
               ElevatedButton(
                 // Make it span the entire width
                 style: ElevatedButton.styleFrom(
@@ -189,11 +185,7 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  // Handle submit button press
-                  // You can perform form validation or submit data here
-                  // You can access the entered medication name using medicationNameController.text
-                },
+                onPressed: _uploadFormData,
                 child: Text('Create Reminder'),
               )
             ],

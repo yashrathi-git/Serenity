@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'medication_reminder.dart';
+
 class MedicationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,20 +47,6 @@ class MedicationScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class MedicationRemindersScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Medication Reminders'),
-      ),
-      body: Center(
-        child: Text('Medication Reminders Screen'),
       ),
     );
   }

@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:serenity/screens/mindfulness/medication_home.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider package
+
 import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:serenity/screens/sos/sos_location.dart';
 import 'package:shared_preferences/shared_preferences.dart';

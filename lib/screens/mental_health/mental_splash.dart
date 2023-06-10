@@ -5,17 +5,28 @@ class MentalSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: Text('Card Buttons'),
+        title: Text(
+          'Card Buttons',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.black,
+        elevation: 0,
       ),
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CardButton(
+            CustomButton(
               title: 'Meditation',
               icon: Icons.spa,
-              color: Colors.green,
+              color: Color(0xFFFC6C6C),
               onTap: () {
                 Navigator.push(
                   context,
@@ -23,11 +34,11 @@ class MentalSplashScreen extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 20),
-            CardButton(
+            SizedBox(height: 32),
+            CustomButton(
               title: 'Journal',
               icon: Icons.book,
-              color: Colors.blue,
+              color: Color(0xFF5DA6FF),
               onTap: () {
                 Navigator.push(
                   context,
@@ -42,47 +53,13 @@ class MentalSplashScreen extends StatelessWidget {
   }
 }
 
-class MeditationScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Meditation Screen'),
-      ),
-      body: Center(
-        child: Text(
-          'Meditation Screen',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-    );
-  }
-}
-
-// class JournalScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Journal Screen'),
-//       ),
-//       body: Center(
-//         child: Text(
-//           'Journal Screen',
-//           style: TextStyle(fontSize: 24),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-class CardButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color color;
   final VoidCallback onTap;
 
-  const CardButton({
+  const CustomButton({
     required this.title,
     required this.icon,
     required this.color,
@@ -91,36 +68,45 @@ class CardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      height: 150,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.4),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
-        color: color,
-        elevation: 5,
-        child: InkWell(
-          onTap: onTap,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              icon,
+              size: 32,
+              color: Colors.white,
+            ),
+            SizedBox(width: 16),
+            Text(
+              title,
+              style: TextStyle(
                 color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10),
-              Text(
-                title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+            Spacer(),
+            Icon(
+              Icons.arrow_forward,
+              size: 24,
+              color: Colors.white,
+            ),
+          ],
         ),
       ),
     );

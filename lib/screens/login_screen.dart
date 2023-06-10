@@ -4,13 +4,26 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:serenity/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+class CarouselItem {
+  final String imagePath;
+  final String title;
+  final String description;
+
+  CarouselItem({
+    required this.imagePath,
+    required this.title,
+    required this.description,
+  });
+}
 
 class LoginPage extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final String loggedInKey = 'loggedIn';
 
-  LoginPage({super.key});
+  LoginPage({Key? key});
 
   Future<UserCredential> _signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -33,9 +46,10 @@ class LoginPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => HomePage(
-                  justLoggedIn: true,
-                )),
+          builder: (context) => HomePage(
+            justLoggedIn: true,
+          ),
+        ),
       );
 
       return userCredential;
@@ -60,9 +74,10 @@ class LoginPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => HomePage(
-                  justLoggedIn: true,
-                )),
+          builder: (context) => HomePage(
+            justLoggedIn: true,
+          ),
+        ),
       );
     }
   }
@@ -71,25 +86,113 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     _checkLoggedIn(context);
 
+    final List<CarouselItem> carouselItems = [
+      CarouselItem(
+        imagePath: 'assets/images/feature1.png',
+        title: 'Feature 1',
+        description: 'Description for Feature 1',
+      ),
+      CarouselItem(
+        imagePath: 'assets/images/feature2.png',
+        title: 'Feature 2',
+        description: 'Description for Feature 2',
+      ),
+      CarouselItem(
+        imagePath: 'assets/images/feature3.png',
+        title: 'Feature 3',
+        description: 'Description for Feature 3',
+      ),
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Serenity',
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.bold,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blue[400]!,
+              Colors.green[400]!,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
-        centerTitle: true,
-      ),
-      body: Container(
-        color: Colors.grey[900],
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                const SizedBox(height: 40),
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: 200,
+                  height: 100,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Serenity',
+                  style: TextStyle(
+                    fontFamily: 'AlBrush',
+                    fontSize: 70,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 5.0,
+                        color: Colors.black,
+                        offset: Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200,
+                    viewportFraction: 0.8,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    aspectRatio: 2.0,
+                  ),
+                  items: carouselItems.map((item) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          color: Colors.white.withOpacity(0.7),
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                item.imagePath,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                item.title,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                item.description,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 40),
                 SignInButton(
                   Buttons.Google,
                   onPressed: () async {

@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:delayed_display/delayed_display.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider package
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:serenity/screens/Sakhi/chat_screen.dart';
 import 'package:serenity/screens/mental_health/mental_splash.dart';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:serenity/screens/sos/sos_location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -183,13 +183,23 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text(
-                  FirebaseAuth.instance.currentUser?.displayName ?? 'Username',
-                  style: const TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
+                accountName: AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      FirebaseAuth.instance.currentUser?.displayName ??
+                          'Username',
+                      textStyle: const TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                      speed: const Duration(milliseconds: 100),
+                    ),
+                  ],
+                  totalRepeatCount: 1,
+                  pause: const Duration(milliseconds: 500),
+                  displayFullTextOnTap: true,
+                  stopPauseOnTap: true,
                 ),
                 accountEmail: Text(
                   FirebaseAuth.instance.currentUser?.email ?? 'Email',
@@ -208,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                   color: Theme.of(context).brightness == Brightness.dark
                       ? Colors.grey[900]
                       : const Color(0xFFAEC6CF),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20),
                   ),
@@ -220,87 +230,97 @@ class _HomePageState extends State<HomePage> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: <Widget>[
-                      ListTile(
-                        leading: Icon(
-                          Icons.home,
-                          color: Colors.black,
-                        ),
-                        title: Text(
-                          'Home',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                      DelayedDisplay(
+                        delay: const Duration(milliseconds: 100),
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.home,
+                            color: Colors.black,
                           ),
+                          title: Text(
+                            'Home',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context); // Close the drawer
+                          },
+                          tileColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[800]
+                                  : Colors.white,
                         ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context); // Close the drawer
-                        },
-                        tileColor:
-                            Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey[800]
-                                : Colors.white,
                       ),
-                      ListTile(
-                        leading: Icon(
-                          Icons.error,
-                          color: Colors.black,
-                        ),
-                        title: Text(
-                          'SoS',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                      DelayedDisplay(
+                        delay: const Duration(milliseconds: 200),
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.error,
+                            color: Colors.black,
                           ),
+                          title: Text(
+                            'SoS',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SoSPage()),
+                            );
+                          },
+                          tileColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[800]
+                                  : Colors.white,
                         ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SoSPage()),
-                          );
-                        },
-                        tileColor:
-                            Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey[800]
-                                : Colors.white,
                       ),
-                      ListTile(
-                        leading: Icon(
-                          Icons.chat,
-                          color: Colors.black,
-                        ),
-                        title: Text(
-                          'Swasthya Sakhi',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                      DelayedDisplay(
+                        delay: const Duration(milliseconds: 300),
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.chat,
+                            color: Colors.black,
                           ),
+                          title: Text(
+                            'Swasthya Sakhi',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen()),
+                            );
+                          },
+                          tileColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[800]
+                                  : Colors.white,
                         ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChatScreen()),
-                          );
-                        },
-                        tileColor:
-                            Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey[800]
-                                : Colors.white,
                       ),
                     ],
                   ),

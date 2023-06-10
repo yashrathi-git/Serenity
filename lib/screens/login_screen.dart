@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:serenity/features/home/home_screen.dart';
+import 'package:serenity/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
@@ -11,9 +10,12 @@ class LoginPage extends StatelessWidget {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final String loggedInKey = 'loggedIn';
 
+  LoginPage({super.key});
+
   Future<UserCredential> _signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -21,7 +23,8 @@ class LoginPage extends StatelessWidget {
     );
 
     try {
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
 
       // Store login status
       final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -29,7 +32,10 @@ class LoginPage extends StatelessWidget {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage(justLoggedIn: true,)),
+        MaterialPageRoute(
+            builder: (context) => HomePage(
+                  justLoggedIn: true,
+                )),
       );
 
       return userCredential;
@@ -53,7 +59,10 @@ class LoginPage extends StatelessWidget {
     if (loggedIn == true) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage(justLoggedIn: true,)),
+        MaterialPageRoute(
+            builder: (context) => HomePage(
+                  justLoggedIn: true,
+                )),
       );
     }
   }

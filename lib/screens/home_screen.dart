@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:serenity/features/home/testlol.dart';
+import 'package:serenity/screens/medication_screen.dart';
+import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   final bool justLoggedIn;
 
-  HomePage({required this.justLoggedIn});
+  const HomePage({required this.justLoggedIn});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
         actions: <Widget>[
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                 icon: CircleAvatar(
                   backgroundImage: NetworkImage(
                     // Replace 'avatarUrl' with the URL of the user's avatar
-                   FirebaseAuth.instance.currentUser?.photoURL ?? '',
+                    FirebaseAuth.instance.currentUser?.photoURL ?? '',
                   ),
                   radius: 15,
                 ),
@@ -111,56 +112,56 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       endDrawer: Drawer(
-  child: ListView(
-    padding: EdgeInsets.zero,
-    children: <Widget>[
-      DrawerHeader(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: <Widget>[
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                FirebaseAuth.instance.currentUser?.photoURL ?? '',
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
               ),
-              radius: 30,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      FirebaseAuth.instance.currentUser?.photoURL ?? '',
+                    ),
+                    radius: 30,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    FirebaseAuth.instance.currentUser?.displayName ??
+                        'Username',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 10),
-            Text(
-              FirebaseAuth.instance.currentUser?.displayName ?? 'Username',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              title: Text('Screen 2'),
+              onTap: () {
+                Navigator.pushNamed(context, '/screen2');
+              },
+            ),
+            ListTile(
+              title: Text('Screen 3'),
+              onTap: () {
+                Navigator.pushNamed(context, '/screen3');
+              },
             ),
           ],
         ),
       ),
-      ListTile(
-        title: Text('Home'),
-        onTap: () {
-          Navigator.pop(context); // Close the drawer
-        },
-      ),
-      ListTile(
-        title: Text('Screen 2'),
-        onTap: () {
-          Navigator.pushNamed(context, '/screen2');
-        },
-      ),
-      ListTile(
-        title: Text('Screen 3'),
-        onTap: () {
-          Navigator.pushNamed(context, '/screen3');
-        },
-      ),
-    ],
-  ),
-),
-
       body: Center(
         child: Text('Welcome to the home page!'),
       ),
@@ -180,23 +181,21 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         onTap: (index) {
-  if (index == 0) {
-    // Handle home tab click
-  } else if (index == 1) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Screen2()),
-    );
-  } else if (index == 2) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => Screen3()),
-    // );
-  }
-},
+          if (index == 0) {
+            // Handle home tab click
+          } else if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MindfulnessScreen()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MedicationScreen()),
+            );
+          }
+        },
       ),
     );
-  
   }
-  }
-
+}

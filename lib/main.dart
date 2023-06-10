@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:serenity/features/home/home_screen.dart';
-import 'package:serenity/features/home/login.dart';
+import 'package:serenity/screens/login_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,11 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-        debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(), // Change "HomePage" to the name of your home page widget
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home:
+          LoginPage(), // Change "HomePage" to the name of your home page widget
     );
   }
 }

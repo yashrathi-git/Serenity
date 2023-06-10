@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:serenity/screens/mental_health/journal_screen.dart';
+import 'package:serenity/screens/mental_health/meditation_screen.dart';
 
 class MentalSplashScreen extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class MentalSplashScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MentalSplashScreen()),
+                  MaterialPageRoute(builder: (context) => MeditationScreen()),
                 );
               },
             ),

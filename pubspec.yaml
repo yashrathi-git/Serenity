@@ -51,6 +51,8 @@ dependencies:
   animate_do: ^3.0.2
   animated_text_kit: ^4.2.2
   delayed_display: ^2.0.0
+  circular_countdown_timer: ^0.2.3
+  ndialog: ^4.3.0
 
 dev_dependencies:
   flutter_test:

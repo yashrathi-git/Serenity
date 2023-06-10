@@ -68,7 +68,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF2A2B4D),
+        backgroundColor: Colors.purple.shade900,
       ),
       body: Center(
         child: Container(
@@ -93,7 +93,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   fontWeight: FontWeight.bold,
                 ),
                 fillColor: Colors.pink,
-                backgroundColor: Color(0xFF2A2B4D),
+                backgroundColor: Colors.purple.shade900,
                 strokeCap: StrokeCap.round,
                 onComplete: () {
                   setState(() {

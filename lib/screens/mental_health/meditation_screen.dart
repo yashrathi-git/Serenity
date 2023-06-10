@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -17,6 +18,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
   int selectedTime = 5; // Default time in minutes
 
   final List<int> meditationTimes = [5, 10, 15, 20, 25, 30];
+  void playMusic() {
+    // Play music
+    final player = AudioPlayer();
+    await player.play()
+  }
 
   // Change Clock button icon and controller
   void switchClockActionButton() {

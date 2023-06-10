@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:serenity/screens/mental_health/journal_screen.dart';
 
 class MentalSplashScreen extends StatelessWidget {
   @override
@@ -58,22 +59,22 @@ class MeditationScreen extends StatelessWidget {
   }
 }
 
-class JournalScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Journal Screen'),
-      ),
-      body: Center(
-        child: Text(
-          'Journal Screen',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-    );
-  }
-}
+// class JournalScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Journal Screen'),
+//       ),
+//       body: Center(
+//         child: Text(
+//           'Journal Screen',
+//           style: TextStyle(fontSize: 24),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class CardButton extends StatelessWidget {
   final String title;

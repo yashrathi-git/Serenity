@@ -43,6 +43,8 @@ dependencies:
   cloud_firestore: ^4.8.0
   carousel_slider: ^4.2.1
   url_launcher: ^6.1.11
+  geolocator: ^9.0.2
+  sms: ^0.2.4
 
 dev_dependencies:
   flutter_test:

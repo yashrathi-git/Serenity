@@ -403,10 +403,10 @@ class _HomePageState extends State<HomePage> {
           if (index == 0) {
             // Handle home tab click
           } else if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => EmergencyScreen()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => EmergencyScreen()),
+            // );
           } else if (index == 2) {
             Navigator.push(
               context,

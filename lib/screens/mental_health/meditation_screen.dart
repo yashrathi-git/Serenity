@@ -12,22 +12,29 @@ class MeditationScreen extends StatefulWidget {
 
 class _MeditationScreenState extends State<MeditationScreen> {
   final CountDownController _clockController = CountDownController();
+  AudioPlayer audioPlayer = AudioPlayer();
+
   Icon _clockButton = kPlayClockButton; // Initial value
   bool _isClockStarted = false; // Conditional flag
 
   int selectedTime = 5; // Default time in minutes
 
   final List<int> meditationTimes = [5, 10, 15, 20, 25, 30];
-  void playMusic() {
-    // Play music
-    final player = AudioPlayer();
-    await player.play()
+  Future<void> playMeditationAudio() async {
+    try {
+      // Replace 'meditation_audio.mp3' with the actual audio file path or URL
+      await audioPlayer.play(DeviceFileSource('assets/music/t.mp3'));
+      print('Playing meditation audio...');
+    } catch (e) {
+      print('Error playing meditation audio: $e');
+    }
   }
 
   // Change Clock button icon and controller
   void switchClockActionButton() {
     if (_clockButton == kPlayClockButton) {
       _clockButton = kPauseClockButton;
+      playMeditationAudio();
 
       if (!_isClockStarted) {
         // Processed on init

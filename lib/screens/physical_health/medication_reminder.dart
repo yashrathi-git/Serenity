@@ -114,7 +114,6 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
             ),
             SizedBox(height: 16.0),
             Card(
-
               elevation: 2,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -143,17 +142,6 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                   ],
                 ),
                 trailing: Icon(Icons.access_time),
-
-              child: ListTile(
-                title: Text(
-                  'Reminder Time',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  selectedTime == null
-                      ? 'Select time'
-                      : selectedTime!.format(context),
-                ),
                 onTap: _openTimePicker,
               ),
             ),

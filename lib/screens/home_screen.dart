@@ -11,7 +11,7 @@ import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:serenity/screens/sos/sos_location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'mindfulness/health_screen_home.dart';
+import 'physical_health/health_screen_home.dart';
 
 class CarouselItem {
   final String title;

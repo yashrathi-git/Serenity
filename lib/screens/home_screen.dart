@@ -117,18 +117,96 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Gender'),
+          title: Row(
+            children: [
+              Text(
+                'Which Gender do you Identify As?',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(width: 8),
+              Text(
+                '',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+            ],
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: Text('Male'),
+                title: Row(
+                  children: [
+                    Text(
+                      'Male',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      '👱‍♂️',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
                 onTap: () {
                   Navigator.pop(context, false);
                 },
               ),
               ListTile(
-                title: Text('Female'),
+                title: Row(
+                  children: [
+                    Text(
+                      'Female',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      '👩‍🦰',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+              ListTile(
+                title: Row(
+                  children: [
+                    Text(
+                      'Prefer Not to Say',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      '❌',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
                 onTap: () {
                   Navigator.pop(context, true);
                 },

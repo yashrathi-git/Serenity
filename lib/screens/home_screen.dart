@@ -3,8 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:serenity/screens/mindfulness/medication_home.dart';
+import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider package
+import 'package:serenity/screens/medication_screen.dart';
 import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class CarouselItem {
+  final String title;
+  final String description;
+  final String imageAssetPath;
+  final String redirectLink;
+
+  CarouselItem({
+    required this.title,
+    required this.description,
+    required this.imageAssetPath,
+    required this.redirectLink,
+  });
+}
 
 class HomePage extends StatefulWidget {
   final bool justLoggedIn;
@@ -18,6 +34,43 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isFemale = false;
   bool isPromptShown = false;
+
+  List<CarouselItem> carouselItems = [
+    CarouselItem(
+      title: "How to Prevent Heart Attacks",
+      description: "Learn about the best practices to prevent heart attacks.",
+      imageAssetPath: "assets/images/heart.png",
+      redirectLink: "https://example.com/heart-attacks",
+    ),
+    CarouselItem(
+      title: "Benefits of Exercise",
+      description: "Discover the numerous benefits of regular exercise.",
+      imageAssetPath: "assets/images/exercise.png",
+      redirectLink: "https://example.com/benefits-of-exercise",
+    ),
+    CarouselItem(
+      title: "Tips for a Healthy Diet",
+      description: "Get valuable tips for maintaining a healthy diet.",
+      imageAssetPath: "assets/images/diet.png",
+      redirectLink: "https://example.com/healthy-diet-tips",
+    ),
+  ];
+
+  List<CardItem> cardItems = [
+    CardItem(
+      title: 'Health Advice 1',
+      description: 'Description of health advice 1',
+      imageAssetPath: 'assets/images/advice1.png',
+      redirectLink: 'https://example.com',
+    ),
+    CardItem(
+      title: 'Health Advice 2',
+      description: 'Description of health advice 2',
+      imageAssetPath: 'assets/images/advice2.png',
+      redirectLink: 'https://example.com',
+    ),
+    // Add more card items as needed
+  ];
 
   @override
   void initState() {
@@ -162,8 +215,115 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Center(
-        child: Text('Welcome to the home page!'),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 28.0),
+        child: Column(
+          children: [
+            CarouselSlider.builder(
+              itemCount: carouselItems.length,
+              itemBuilder: (BuildContext context, int index, int realIndex) {
+                final item = carouselItems[index];
+                return GestureDetector(
+                  onTap: () {
+                    // Handle item click, e.g., open redirect link
+                    // You can use package like url_launcher to open the link in a browser
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          item.title,
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          item.description,
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                        SizedBox(height: 10.0),
+                        Image.asset(
+                          item.imageAssetPath,
+                          height: 100.0,
+                        ),
+                        SizedBox(height: 10.0),
+                        ElevatedButton(
+                          child: Text('Learn More'),
+                          onPressed: () {
+                            // Handle button click
+                            // Open the redirect link
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              options: CarouselOptions(
+                height: 200.0,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) {},
+                scrollDirection: Axis.horizontal,
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: cardItems.length,
+                itemBuilder: (BuildContext context, int index) {
+                  CardItem item = cardItems[index];
+                  return Container(
+                    margin: EdgeInsets.all(10.0),
+                    child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              item.title,
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                            SizedBox(height: 10.0),
+                            Text(
+                              item.description,
+                              style: TextStyle(fontSize: 14.0),
+                            ),
+                            SizedBox(height: 10.0),
+                            Image.asset(
+                              item.imageAssetPath,
+                              height: 100.0,
+                            ),
+                            SizedBox(height: 10.0),
+                            ElevatedButton(
+                              child: Text('Learn More'),
+                              onPressed: () {
+                                // Handle button click
+                                // Open the redirect link
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: CupertinoTabBar(
         items: [
@@ -198,4 +358,18 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+class CardItem {
+  final String title;
+  final String description;
+  final String imageAssetPath;
+  final String redirectLink;
+
+  CardItem({
+    required this.title,
+    required this.description,
+    required this.imageAssetPath,
+    required this.redirectLink,
+  });
 }

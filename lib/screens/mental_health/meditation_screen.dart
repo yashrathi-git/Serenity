@@ -1,4 +1,6 @@
-import 'package:audioplayers/audioplayers.dart';
+import 'dart:html';
+
+import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -12,7 +14,6 @@ class MeditationScreen extends StatefulWidget {
 
 class _MeditationScreenState extends State<MeditationScreen> {
   final CountDownController _clockController = CountDownController();
-  AudioPlayer audioPlayer = AudioPlayer();
 
   Icon _clockButton = kPlayClockButton; // Initial value
   bool _isClockStarted = false; // Conditional flag
@@ -20,22 +21,15 @@ class _MeditationScreenState extends State<MeditationScreen> {
   int selectedTime = 5; // Default time in minutes
 
   final List<int> meditationTimes = [5, 10, 15, 20, 25, 30];
-  Future<void> playMeditationAudio() async {
-    try {
-      // Replace 'meditation_audio.mp3' with the actual audio file path or URL
-      await audioPlayer.play(DeviceFileSource('assets/music/t.mp3'));
-      print('Playing meditation audio...');
-    } catch (e) {
-      print('Error playing meditation audio: $e');
-    }
-  }
 
   // Change Clock button icon and controller
-  void switchClockActionButton() {
+  void switchClockActionButton() async {
     if (_clockButton == kPlayClockButton) {
       _clockButton = kPauseClockButton;
-      playMeditationAudio();
 
+      final player = AudioPlayer();
+      await player.setFilePath("t.mp3");
+      player.play();
       if (!_isClockStarted) {
         // Processed on init
         _isClockStarted = true;

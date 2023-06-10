@@ -575,16 +575,16 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            // label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.screen_rotation),
-            label: 'Screen 2',
+            icon: Icon(Icons.health_and_safety),
+            // label: 'Toolbox',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.screen_rotation),
-            label: 'Screen 3',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.screen_rotation),
+          //   label: 'Screen 3',
+          // ),
         ],
         onTap: (index) {
           if (index == 0) {
@@ -592,14 +592,15 @@ class _HomePageState extends State<HomePage> {
           } else if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MentalSplashScreen()),
-            );
-          } else if (index == 2) {
-            Navigator.push(
-              context,
               MaterialPageRoute(builder: (context) => MedicationScreen()),
             );
           }
+          // } else if (index == 2) {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => MedicationScreen()),
+          //   );
+          // }
         },
       ),
     );

@@ -161,9 +161,14 @@ class _JournalScreenState extends State<JournalScreen> {
             final title = entry['title'] ?? '';
             final description = entry['description'] ?? '';
             final mood = entry['mood'];
+            final timestamp = entry['timestamp'] as Timestamp;
+
+            final dateTime = timestamp.toDate();
+            final formattedDate =
+                '${dateTime.day}-${dateTime.month}-${dateTime.year}';
 
             return ListTile(
-              title: Text(title),
+              title: Text('$title : $formattedDate'),
               subtitle: Text(description),
               trailing: _buildMoodEmoji(mood),
             );

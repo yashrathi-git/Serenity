@@ -46,6 +46,9 @@ dependencies:
   geolocator: ^9.0.2
   permission_handler: ^10.3.0
   intl: ^0.18.1
+  speech_to_text: ^6.1.1
+  flutter_tts: ^3.7.0
+  animate_do: ^3.0.2
 
 dev_dependencies:
   flutter_test:

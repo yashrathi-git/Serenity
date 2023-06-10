@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:serenity/screens/physical_health/widgets/medication_reminders_list.dart';
 
 class MedicationRemindersScreen extends StatefulWidget {
   @override
@@ -20,12 +21,34 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
       CollectionReference remindersCollection =
           FirebaseFirestore.instance.collection('reminders');
 
+      // Convert selectedDate to Timestamp
+      Timestamp? dateTimestamp;
+      if (selectedDate != null) {
+        dateTimestamp = Timestamp.fromDate(selectedDate!);
+      }
+
+      // Convert selectedTime to Timestamp
+      Timestamp? timeTimestamp;
+      if (selectedTime != null) {
+        final now = DateTime.now();
+        final selectedDateTime = DateTime(now.year, now.month, now.day,
+            selectedTime!.hour, selectedTime!.minute);
+        timeTimestamp = Timestamp.fromDate(selectedDateTime);
+      }
+
       // Create a new document in the collection
       await remindersCollection.add({
         'userId': currentUser?.uid,
         'medicationName': medicationNameController.text,
-        'selectedDate': selectedDate,
-        'selectedTime': selectedTime.toString(),
+        'selectedDate': dateTimestamp,
+        'selectedTime': timeTimestamp,
+      });
+
+      // Reset the input fields
+      medicationNameController.clear();
+      setState(() {
+        selectedDate = null;
+        selectedTime = null;
       });
 
       // Show a success message
@@ -81,114 +104,123 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Card(
-                color: Colors.transparent,
-                child: Padding(
-                  padding: EdgeInsets.all(0.0), // Remove the padding
-                  child: TextField(
-                    controller: medicationNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Medication Name',
-                      labelStyle: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16.0,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
-                          width: 2.0,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+          child: Container(
+            child: Column(
+              children: [
+                Card(
+                  color: Colors.transparent,
+                  child: Padding(
+                    padding: EdgeInsets.all(0.0), // Remove the padding
+                    child: TextField(
+                      controller: medicationNameController,
+                      decoration: InputDecoration(
+                        labelText: 'Medication Name',
+                        labelStyle: TextStyle(
                           color: Colors.grey,
-                          width: 1.0,
+                          fontSize: 16.0,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                            width: 2.0,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                            width: 1.0,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 16.0),
-              Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  title: Text(
-                    'Reminder Time',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        selectedTime == null
-                            ? 'Select time'
-                            : 'Time: ${selectedTime!.format(context)}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Tap to select time',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  trailing: Icon(Icons.access_time),
-                  onTap: _openTimePicker,
-                ),
-              ),
-              SizedBox(height: 16.0),
-              Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  title: Text(
-                    'Medication Reminders',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        selectedDate == null
-                            ? 'From'
-                            : 'Date: ${selectedDate.toString().substring(0, 10)}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Tap to select date',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  trailing: Icon(Icons.calendar_today),
-                  onTap: _openDatePicker,
-                ),
-              ),
-              ElevatedButton(
-                // Make it span the entire width
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                SizedBox(height: 16.0),
+                Card(
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    title: Text(
+                      'Reminder Time',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          selectedTime == null
+                              ? 'Select time'
+                              : 'Time: ${selectedTime!.format(context)}',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Tap to select time',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                    trailing: Icon(Icons.access_time),
+                    onTap: _openTimePicker,
+                  ),
                 ),
-                onPressed: _uploadFormData,
-                child: Text('Create Reminder'),
-              )
-            ],
+                SizedBox(height: 16.0),
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    title: Text(
+                      'Medication Reminders',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          selectedDate == null
+                              ? 'From'
+                              : 'Date: ${selectedDate.toString().substring(0, 10)}',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Tap to select date',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                    trailing: Icon(Icons.calendar_today),
+                    onTap: _openDatePicker,
+                  ),
+                ),
+                ElevatedButton(
+                  // Make it span the entire width
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: _uploadFormData,
+                  child: Text('Create Reminder'),
+                ),
+                SizedBox(height: 16.0),
+                SizedBox(
+                  child: ReminderListWidget(),
+                  height: 500,
+                ),
+              ],
+            ),
           ),
         ),
       ),

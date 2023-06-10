@@ -1,0 +1,134 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+class ReminderListWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('reminders')
+          .where('userId', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // Convert each document snapshot into a Reminder object
+          List<Reminder> reminders = snapshot.data!.docs
+              .map((doc) => Reminder.fromSnapshot(doc))
+              .toList();
+
+          if (reminders.isEmpty) {
+            return Center(
+              child: Text('No reminders found'),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: reminders.length,
+            itemBuilder: (context, index) {
+              Reminder reminder = reminders[index];
+
+              // Format the date
+              String formattedDate = _formatDate(reminder.selectedDate);
+
+              // Format the time
+              String formattedTime = _formatTime(reminder.selectedTime);
+
+              return Card(
+                child: ListTile(
+                  title: Text(reminder.medicationName),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Till: $formattedDate'),
+                      Text('Time: $formattedTime'),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Text('Error fetching reminders');
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  // Format the date as "12th of June"
+  String _formatDate(DateTime date) {
+    String day = date.day.toString();
+    String month = _getMonthName(date.month);
+    String suffix = _getNumberSuffix(date.day);
+    return '$day$suffix of $month';
+  }
+
+  // Get the month name from the month number
+  String _getMonthName(int month) {
+    const List<String> monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    return monthNames[month - 1];
+  }
+
+  // Get the appropriate suffix for a number
+  String _getNumberSuffix(int number) {
+    if (number >= 11 && number <= 13) {
+      return 'th';
+    }
+    switch (number % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
+  // Format the time as "HH:MM"
+  String _formatTime(DateTime time) {
+    String hour = time.hour.toString().padLeft(2, '0');
+    String minute = time.minute.toString().padLeft(2, '0');
+    return '$hour:$minute';
+  }
+}
+
+class Reminder {
+  final String medicationName;
+  final DateTime selectedDate;
+  final DateTime selectedTime;
+
+  Reminder({
+    required this.medicationName,
+    required this.selectedDate,
+    required this.selectedTime,
+  });
+
+  // Create a Reminder object from a Firestore document snapshot
+  factory Reminder.fromSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return Reminder(
+      medicationName: data['medicationName'],
+      selectedDate: (data['selectedDate'] as Timestamp).toDate(),
+      selectedTime: (data['selectedTime'] as Timestamp).toDate(),
+    );
+  }
+}

@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -17,6 +18,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
   int selectedTime = 5; // Default time in minutes
 
   final List<int> meditationTimes = [5, 10, 15, 20, 25, 30];
+  void playMusic() {
+    // Play music
+    final player = AudioPlayer();
+    await player.play()
+  }
 
   // Change Clock button icon and controller
   void switchClockActionButton() {
@@ -46,23 +52,14 @@ class _MeditationScreenState extends State<MeditationScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.headset_off),
-        ),
         title: Text('Meditation'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.alarm_off),
-          ),
-        ],
       ),
-      body: Container(
-        child: Padding(
+      body: Center(
+        child: Container(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CircularCountDownTimer(
                 key: Key(
@@ -81,31 +78,45 @@ class _MeditationScreenState extends State<MeditationScreen> {
                 strokeCap: StrokeCap.round,
                 onComplete: () {
                   setState(() {
-                    // Handle timer completion
+                    _clockController.restart(); // Restart the timer
                   });
                 },
               ),
               SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: meditationTimes.map((time) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: selectedTime == time
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey,
+              DropdownButton<int>(
+                value: selectedTime,
+                items: meditationTimes.map((time) {
+                  return DropdownMenuItem<int>(
+                    value: time,
+                    child: Text(
+                      '$time min',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white, // Update the color to white
                       ),
-                      onPressed: () {
-                        setState(() {
-                          selectedTime = time;
-                        });
-                      },
-                      child: Text('$time min'),
                     ),
                   );
                 }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedTime = value!;
+                  });
+                },
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white, // Update the color to white
+                ),
+                elevation: 3,
+                icon: Icon(Icons.arrow_drop_down,
+                    color: Colors.white), // Update the icon color to white
+                iconSize: 24,
+                underline: Container(
+                  height: 1,
+                  color: Colors.white, // Update the underline color to white
+                ),
+                isExpanded: true,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),

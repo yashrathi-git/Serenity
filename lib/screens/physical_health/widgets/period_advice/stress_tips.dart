@@ -6,7 +6,7 @@ class StressTipsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: const Text('Stress Management'),
       ),
@@ -69,7 +69,6 @@ class StressTipsScreen extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 
@@ -120,7 +119,7 @@ class StressTipsScreen extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             image: DecorationImage(
-              image:AssetImage(imageUrl),
+              image: AssetImage(imageUrl),
               fit: BoxFit.cover,
             ),
           ),
@@ -158,7 +157,7 @@ class StressTipsScreen extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.grey[900],
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 padding: const EdgeInsets.all(16.0),

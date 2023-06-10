@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -20,6 +21,19 @@ class _MeditationScreenState extends State<MeditationScreen> {
   int selectedTime = 5; // Default time in minutes
 
   final List<int> meditationTimes = [5, 10, 15, 20, 25, 30];
+  final List<String> meditationQuotes = [
+    "Be present in the moment.",
+    "Breathe deeply and let go of tension.",
+    "Find peace within yourself.",
+    "Focus on the present and let go of the past.",
+    "Embrace silence and stillness.",
+    "Cultivate gratitude for the present moment.",
+    "Let your thoughts come and go like passing clouds.",
+    "Connect with your inner wisdom.",
+    "Release judgment and embrace acceptance.",
+    "Allow yourself to simply be.",
+    // Add more quotes as desired
+  ];
 
   // Change Clock button icon and controller
   void switchClockActionButton() async {
@@ -67,8 +81,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
             color: Colors.white,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.purple.shade900,
+        backgroundColor: Colors.purple,
       ),
       body: Center(
         child: Container(
@@ -76,6 +89,27 @@ class _MeditationScreenState extends State<MeditationScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                height: 50,
+                child: AnimatedTextKit(
+                  animatedTexts: meditationQuotes.map((quote) {
+                    return RotateAnimatedText(
+                      quote,
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      duration: const Duration(seconds: 2),
+                      rotateOut: true,
+                      alignment: Alignment.center,
+                    );
+                  }).toList(),
+                  repeatForever: true,
+                  pause: const Duration(seconds: 1),
+                ),
+              ),
+              SizedBox(height: 20.0),
               CircularCountDownTimer(
                 key: Key(
                     selectedTime.toString()), // Add a key to the timer widget

@@ -6,7 +6,7 @@ class ExerciseTipsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: const Text('Fitness Exercises'),
       ),
@@ -73,7 +73,6 @@ class ExerciseTipsScreen extends StatelessWidget {
               ),
             ],
           ),
-   
         ],
       ),
     );
@@ -139,7 +138,6 @@ class ExerciseTipsScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-       
         trailing: const Icon(
           Icons.chevron_right,
           color: Colors.white,

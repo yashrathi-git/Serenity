@@ -6,7 +6,7 @@ class FoodTipsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Dark background color
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: const Text('Healthy Eating'),
       ),
@@ -73,7 +73,6 @@ class FoodTipsScreen extends StatelessWidget {
               ),
             ],
           ),
-
         ],
       ),
     );
@@ -139,7 +138,6 @@ class FoodTipsScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-       
         trailing: const Icon(
           Icons.chevron_right,
           color: Colors.white,

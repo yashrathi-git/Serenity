@@ -159,7 +159,7 @@ class _MenstrualCycleTrackerScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: const Text(
           'Period Tracking',

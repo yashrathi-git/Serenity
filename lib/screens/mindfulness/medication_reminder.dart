@@ -9,6 +9,7 @@ class MedicationRemindersScreen extends StatefulWidget {
 class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
+  TextEditingController medicationNameController = TextEditingController();
 
   Future<void> _openDatePicker() async {
     final DateTime? picked = await showDatePicker(
@@ -37,6 +38,12 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
   }
 
   @override
+  void dispose() {
+    medicationNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -47,11 +54,26 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
         child: Column(
           children: [
             Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: medicationNameController,
+                  decoration: InputDecoration(
+                    labelText: 'Medication Name',
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Card(
               child: ListTile(
-                title: Text('Medication Reminders'),
+                title: Text(
+                  'Medication Reminders',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Text(
                   selectedDate == null
-                      ? 'Select date'
+                      ? 'To'
                       : selectedDate.toString().substring(0, 10),
                 ),
                 onTap: _openDatePicker,
@@ -59,8 +81,44 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
             ),
             SizedBox(height: 16.0),
             Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: ListTile(
-                title: Text('Medication Tracker'),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                title: Text(
+                  'Medication Reminders',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      selectedDate == null
+                          ? 'From'
+                          : 'Date: ${selectedDate.toString().substring(0, 10)}',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Tap to select date',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                trailing: Icon(Icons.calendar_today),
+                onTap: _openDatePicker,
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Card(
+              child: ListTile(
+                title: Text(
+                  'Reminder Time',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Text(
                   selectedTime == null
                       ? 'Select time'

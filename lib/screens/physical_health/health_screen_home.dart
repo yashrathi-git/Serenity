@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:serenity/screens/mental_health/journal_screen.dart';
 import 'package:serenity/screens/physical_health/widgets/menstrual_tracker.dart';
 
 import 'medication_reminder.dart';
@@ -62,7 +63,71 @@ class MedicationScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 16.0),
+            Card(
+              color: Colors.purple, // Set the card background color
+              child: ListTile(
+                title: Text(
+                  'Meditation',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white, // Set the title text color
+                  ),
+                ),
+                subtitle: Text(
+                  'Meditate to relax your mind and body',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70, // Set the subtitle text color
+                  ),
+                ),
+                leading: Icon(
+                  Icons.spa,
+                  color: Colors.white, // Set the leading icon color
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MedicationRemindersScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Card(
+              color: Colors.green, // Set the card background color
+              child: ListTile(
+                title: Text(
+                  'Journal',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white, // Set the title text color
+                  ),
+                ),
+                subtitle: Text(
+                  'Journal your thoughts and feelings',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70, // Set the subtitle text color
+                  ),
+                ),
+                leading: Icon(
+                  Icons.book,
+                  color: Colors.white, // Set the leading icon color
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => JournalScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            // SizedBox(height: 16.0),
             FutureBuilder<bool>(
               future: _getUserGender(),
               builder: (context, snapshot) {

@@ -2,7 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:serenity/screens/mindfulness/medication_home.dart';
+import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider package
+
 import 'package:serenity/screens/mindfulness_screen.dart';
+import 'package:serenity/screens/sos/sos_location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CarouselItem {
@@ -58,6 +63,12 @@ class _HomePageState extends State<HomePage> {
       title: 'Health Advice 1',
       description: 'Description of health advice 1',
       imageAssetPath: 'assets/images/advice1.png',
+      redirectLink: 'https://example.com',
+    ),
+    CardItem(
+      title: 'Health Advice 2',
+      description: 'Description of health advice 2',
+      imageAssetPath: 'assets/images/advice2.png',
       redirectLink: 'https://example.com',
     ),
     CardItem(
@@ -223,41 +234,70 @@ class _HomePageState extends State<HomePage> {
                 return GestureDetector(
                   onTap: () {
                     // Handle item click, e.g., open redirect link
-                    // You can use package like url_launcher to open the link in a browser
+                    // You can use a package like url_launcher to open the link in a browser
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    margin: EdgeInsets.symmetric(horizontal: 16.0),
                     decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          item.title,
-                          style: TextStyle(fontSize: 18.0),
-                        ),
-                        SizedBox(height: 10.0),
-                        Text(
-                          item.description,
-                          style: TextStyle(fontSize: 14.0),
-                        ),
-                        SizedBox(height: 10.0),
-                        Image.asset(
-                          item.imageAssetPath,
-                          height: 100.0,
-                        ),
-                        SizedBox(height: 10.0),
-                        ElevatedButton(
-                          child: Text('Learn More'),
-                          onPressed: () {
-                            // Handle button click
-                            // Open the redirect link
-                          },
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          blurRadius: 6.0,
+                          offset: Offset(0, 3),
                         ),
                       ],
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            item.title,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            item.description,
+                            style: TextStyle(fontSize: 14.0),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: 20.0),
+                          Image.asset(
+                            item.imageAssetPath,
+                            height: 120.0,
+                            width: 120.0,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(height: 20.0),
+                          ElevatedButton(
+                            child: Text(
+                              'Learn More',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            onPressed: () {
+                              // Handle button click
+                              // Open the redirect link
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.purple,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 12.0,
+                                horizontal: 24.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -275,6 +315,7 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
               ),
             ),
+            SizedBox(height: 20.0),
             Expanded(
               child: ListView.builder(
                 itemCount: cardItems.length,
@@ -283,6 +324,10 @@ class _HomePageState extends State<HomePage> {
                   return Container(
                     margin: EdgeInsets.all(10.0),
                     child: Card(
+                      elevation: 4.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
                         child: Column(
@@ -291,25 +336,44 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               item.title,
-                              style: TextStyle(fontSize: 18.0),
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             SizedBox(height: 10.0),
                             Text(
                               item.description,
                               style: TextStyle(fontSize: 14.0),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 10.0),
+                            SizedBox(height: 20.0),
                             Image.asset(
                               item.imageAssetPath,
-                              height: 100.0,
+                              height: 120.0,
+                              width: 120.0,
+                              fit: BoxFit.contain,
                             ),
-                            SizedBox(height: 10.0),
+                            SizedBox(height: 20.0),
                             ElevatedButton(
-                              child: Text('Learn More'),
+                              child: Text(
+                                'Learn More',
+                                style: TextStyle(fontSize: 16.0),
+                              ),
                               onPressed: () {
                                 // Handle button click
                                 // Open the redirect link
                               },
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.pink,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24.0),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 12.0,
+                                  horizontal: 24.0,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -341,10 +405,10 @@ class _HomePageState extends State<HomePage> {
           if (index == 0) {
             // Handle home tab click
           } else if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MindfulnessScreen()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => EmergencyScreen()),
+            // );
           } else if (index == 2) {
             Navigator.push(
               context,

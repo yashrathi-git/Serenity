@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "887891433288",
+    "project_id": "serenity-fire",
+    "storage_bucket": "serenity-fire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887891433288:android:edde4cbac2eef2c0f1c57d",
+        "android_client_info": {
+          "package_name": "com.example.serenity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887891433288-3f511lg7jrr23rki7kqa952st13cvprn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.serenity",
+            "certificate_hash": "ed265e79dbdd920fed0bbc8490f9274311a8e537"
+          }
+        },
+        {
+          "client_id": "887891433288-bijgmpgcvv9707qlsghnksjoirb8tuub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.serenity",
+            "certificate_hash": "5e27a76616e4facbcd0fdb059dfdd665f58573c5"
+          }
+        },
+        {
+          "client_id": "887891433288-7kpfjq69po6tfah15n0u7njpkik1mhdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQFULFh3lFlWci4SI4uA7tWyJb0MnLYPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887891433288-7kpfjq69po6tfah15n0u7njpkik1mhdq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 icon: CircleAvatar(
                   backgroundImage: NetworkImage(
                     // Replace 'avatarUrl' with the URL of the user's avatar
-                    'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+                   FirebaseAuth.instance.currentUser?.photoURL ?? '',
                   ),
                   radius: 15,
                 ),
@@ -111,57 +111,56 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+  child: ListView(
+    padding: EdgeInsets.zero,
+    children: <Widget>[
+      DrawerHeader(
+        decoration: BoxDecoration(
+          color: Colors.blue,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+            CircleAvatar(
+              backgroundImage: NetworkImage(
+                FirebaseAuth.instance.currentUser?.photoURL ?? '',
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      // Replace 'avatarUrl' with the URL of the user's avatar
-                      'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
-                    ),
-                    radius: 30,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    // Replace 'username' with the user's name
-                    'Username',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+              radius: 30,
+            ),
+            SizedBox(height: 10),
+            Text(
+              FirebaseAuth.instance.currentUser?.displayName ?? 'Username',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
               ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            ListTile(
-              title: Text('Screen 2'),
-              onTap: () {
-                Navigator.pushNamed(context, '/screen2');
-              },
-            ),
-            ListTile(
-              title: Text('Screen 3'),
-              onTap: () {
-                Navigator.pushNamed(context, '/screen3');
-              },
             ),
           ],
         ),
       ),
+      ListTile(
+        title: Text('Home'),
+        onTap: () {
+          Navigator.pop(context); // Close the drawer
+        },
+      ),
+      ListTile(
+        title: Text('Screen 2'),
+        onTap: () {
+          Navigator.pushNamed(context, '/screen2');
+        },
+      ),
+      ListTile(
+        title: Text('Screen 3'),
+        onTap: () {
+          Navigator.pushNamed(context, '/screen3');
+        },
+      ),
+    ],
+  ),
+),
+
       body: Center(
         child: Text('Welcome to the home page!'),
       ),

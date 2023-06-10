@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:serenity/features/home/testlol.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -86,13 +88,116 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+        return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
+        actions: <Widget>[
+          Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    // Replace 'avatarUrl' with the URL of the user's avatar
+                    'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+                  ),
+                  radius: 15,
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      // Replace 'avatarUrl' with the URL of the user's avatar
+                      'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+                    ),
+                    radius: 30,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    // Replace 'username' with the user's name
+                    'Username',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              title: Text('Screen 2'),
+              onTap: () {
+                Navigator.pushNamed(context, '/screen2');
+              },
+            ),
+            ListTile(
+              title: Text('Screen 3'),
+              onTap: () {
+                Navigator.pushNamed(context, '/screen3');
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: Text('Welcome to the home page!'),
       ),
+      bottomNavigationBar: CupertinoTabBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.screen_rotation),
+            label: 'Screen 2',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.screen_rotation),
+            label: 'Screen 3',
+          ),
+        ],
+        onTap: (index) {
+  if (index == 0) {
+    // Handle home tab click
+  } else if (index == 1) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Screen2()),
     );
+  } else if (index == 2) {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => Screen3()),
+    // );
   }
-}
+},
+      ),
+    );
+  
+  }
+  }
+

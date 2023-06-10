@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:serenity/screens/mindfulness/medication_home.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider package
+import 'package:serenity/screens/mindfulness/mindfulness_home.dart';
 
 import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:serenity/screens/sos/sos_location.dart';
@@ -209,9 +209,12 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              title: Text('Screen 2'),
+              title: Text('SoS'),
               onTap: () {
-                Navigator.pushNamed(context, '/screen2');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SoSPage()),
+                );
               },
             ),
             ListTile(
@@ -407,7 +410,7 @@ class _HomePageState extends State<HomePage> {
           } else if (index == 1) {
             // Navigator.push(
             //   context,
-            //   MaterialPageRoute(builder: (context) => EmergencyScreen()),
+            //   MaterialPageRoute(builder: (context) => SoSPage()),
             // );
           } else if (index == 2) {
             Navigator.push(

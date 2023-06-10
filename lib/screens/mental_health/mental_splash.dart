@@ -29,10 +29,10 @@ class MentalSplashScreen extends StatelessWidget {
               icon: Icons.spa,
               color: Color(0xFFFC6C6C),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => MeditationScreen()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MeditationScreen()),
+                );
               },
             ),
             SizedBox(height: 32),

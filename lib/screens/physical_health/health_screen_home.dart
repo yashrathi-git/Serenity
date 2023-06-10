@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:serenity/screens/mental_health/journal_screen.dart';
+import 'package:serenity/screens/mental_health/meditation_screen.dart';
 import 'package:serenity/screens/physical_health/widgets/menstrual_tracker.dart';
 
 import 'medication_reminder.dart';
@@ -86,6 +87,7 @@ class MedicationScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
+
                 elevation: 4,
                 child: ListTile(
                   title: Text(
@@ -115,7 +117,7 @@ class MedicationScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MedicationRemindersScreen(),
+                        builder: (context) => MeditationScreen(),
                       ),
                     );
                   },

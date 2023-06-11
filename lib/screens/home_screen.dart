@@ -13,6 +13,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:serenity/screens/mindfulness_screen.dart';
 import 'package:serenity/screens/sos/sos_location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'physical_health/health_screen_home.dart';
 
@@ -47,41 +48,55 @@ class _HomePageState extends State<HomePage> {
     CarouselItem(
       title: "How to Prevent Heart Attacks",
       description: "Learn about the best practices to prevent heart attacks.",
-      imageAssetPath: "assets/images/heart.png",
-      redirectLink: "https://example.com/heart-attacks",
+      imageAssetPath: "assets/images/attack.jpg",
+      redirectLink:
+          "https://www.moneycontrol.com/news/health-and-fitness/how-to-prevent-heart-attacks-dont-skip-your-leg-exercises-in-the-gym-10718931.html",
     ),
     CarouselItem(
       title: "Benefits of Exercise",
       description: "Discover the numerous benefits of regular exercise.",
-      imageAssetPath: "assets/images/exercise.png",
-      redirectLink: "https://example.com/benefits-of-exercise",
+      imageAssetPath: "assets/images/exerc.png",
+      redirectLink:
+          "https://zeenews.india.com/health/benefits-of-exercise-daily-movement-can-help-reduce-the-risk-of-type-2-diabetes-2618522",
     ),
     CarouselItem(
       title: "Tips for a Healthy Diet",
       description: "Get valuable tips for maintaining a healthy diet.",
-      imageAssetPath: "assets/images/diet.png",
-      redirectLink: "https://example.com/healthy-diet-tips",
+      imageAssetPath: "assets/images/diet.jpg",
+      redirectLink:
+          "https://www.india.com/lifestyle/healthy-diet-101-7-diet-tips-to-lose-weight-and-improve-overall-health-6082632/",
     ),
   ];
 
   List<CardItem> cardItems = [
     CardItem(
-      title: 'Health Advice 1',
-      description: 'Description of health advice 1',
-      imageAssetPath: 'assets/images/advice1.png',
-      redirectLink: 'https://example.com',
+        title: 'Sleep Well',
+        description:
+            'Get enough sleep to support overall health and well-being. Aim for 7-8 hours of quality sleep each night.',
+        imageAssetPath: 'assets/images/sleep.jpg',
+        redirectLink: 'https://www.medicalnewstoday.com/articles/325353'),
+    CardItem(
+      title: 'Take care of Hydration',
+      description:
+          'Stay hydrated throughout the day by drinking an adequate amount of water. Aim for at least 8 glasses (64 ounces) per day.',
+      imageAssetPath: 'assets/images/hydrate.png',
+      redirectLink:
+          'https://www.metropolisindia.com/blog/lifestyle/health-wellness-summer-special-6-smart-ways-to-stay-hydrated/',
     ),
     CardItem(
-      title: 'Health Advice 2',
-      description: 'Description of health advice 2',
-      imageAssetPath: 'assets/images/advice2.png',
-      redirectLink: 'https://example.com',
+      title: 'Reduce Stress',
+      description:
+          'Practice mindfulness or meditation to reduce stress and improve mental well-being. Take a few minutes each day to relax and focus on your breath.',
+      imageAssetPath: 'assets/images/easy.png',
+      redirectLink: 'https://health.clevelandclinic.org/how-to-relieve-stress/',
     ),
     CardItem(
-      title: 'Health Advice 2',
-      description: 'Description of health advice 2',
-      imageAssetPath: 'assets/images/advice2.png',
-      redirectLink: 'https://example.com',
+      title: 'Keep Good Posture',
+      description:
+          'Maintain a healthy posture while sitting and standing to prevent back and neck pain. Use ergonomic furniture and take breaks to stretch.',
+      imageAssetPath: 'assets/images/posture2.jpeg',
+      redirectLink:
+          'https://www.healthline.com/health/bone-health/the-4-main-types-of-posture',
     ),
     // Add more card items as needed
   ];
@@ -424,52 +439,74 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            item.title,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey[300]!,
+                            width: 1.0,
                           ),
-                          SizedBox(height: 10.0),
-                          Text(
-                            item.description,
-                            style: TextStyle(fontSize: 14.0),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 20.0),
-                          Image.asset(
-                            item.imageAssetPath,
-                            height: 120.0,
-                            width: 120.0,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(height: 20.0),
-                          ElevatedButton(
-                            child: Text(
-                              'Learn More',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                            onPressed: () {
-                              // Handle button click
-                              // Open the redirect link
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.purple,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                vertical: 12.0,
-                                horizontal: 24.0,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        padding: EdgeInsets.all(16.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                item.imageAssetPath,
+                                height: 100.0,
+                                width: 100.0,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 16.0),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.title,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    item.description,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  ElevatedButton(
+                                    child: Text(
+                                      'Learn More',
+                                      style: TextStyle(fontSize: 16.0),
+                                    ),
+                                    onPressed: () {
+                                      launch(item.redirectLink);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.purple,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 12.0,
+                                        horizontal: 24.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -501,55 +538,68 @@ class _HomePageState extends State<HomePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              item.title,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.title,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10.0),
+                                  Text(
+                                    item.description,
+                                    style: TextStyle(fontSize: 14.0),
+                                  ),
+                                  SizedBox(height: 20.0),
+                                  ElevatedButton(
+                                    child: Text(
+                                      'Learn More',
+                                      style: TextStyle(fontSize: 16.0),
+                                    ),
+                                    onPressed: () {
+                                      launch(item.redirectLink);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.pink,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 12.0,
+                                        horizontal: 24.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(height: 10.0),
-                            Text(
-                              item.description,
-                              style: TextStyle(fontSize: 14.0),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 20.0),
-                            Image.asset(
-                              item.imageAssetPath,
-                              height: 120.0,
+                          ),
+                          SizedBox(width: 20.0),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
                               width: 120.0,
-                              fit: BoxFit.contain,
-                            ),
-                            SizedBox(height: 20.0),
-                            ElevatedButton(
-                              child: Text(
-                                'Learn More',
-                                style: TextStyle(fontSize: 16.0),
-                              ),
-                              onPressed: () {
-                                // Handle button click
-                                // Open the redirect link
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.pink,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24.0),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 12.0,
-                                  horizontal: 24.0,
+                              height: 120.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.0),
+                                image: DecorationImage(
+                                  image: AssetImage(item.imageAssetPath),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   );

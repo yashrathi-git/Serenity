@@ -96,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sakhi'),
+        title: const Text('Swasthya Sakhi'),
         backgroundColor: Colors.green[600],
       ),
       body: SingleChildScrollView(

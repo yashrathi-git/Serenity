@@ -47,7 +47,7 @@ class SoSPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Emergency Assistance',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -56,25 +56,25 @@ class SoSPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 24.0),
+                  const SizedBox(height: 24.0),
                   ElevatedButton.icon(
                     onPressed: () => launch('tel:102'),
-                    icon: Icon(Icons.local_hospital_outlined),
-                    label: Text(
+                    icon: const Icon(Icons.local_hospital_outlined),
+                    label: const Text(
                       'Call Ambulance',
                       style: TextStyle(fontSize: 24.0),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red.shade800,
                       onPrimary: Colors.white,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 24.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                   ),
-                  SizedBox(height: 24.0),
+                  const SizedBox(height: 24.0),
                   FutureBuilder(
                     future: Permission.location.status,
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -93,15 +93,15 @@ class SoSPage extends StatelessWidget {
                             String url = 'sms:?body=$encodedMessage';
                             launchUrlString(url);
                           },
-                          icon: Icon(Icons.location_on_outlined),
-                          label: Text(
+                          icon: const Icon(Icons.location_on_outlined),
+                          label: const Text(
                             'Share Location via SMS',
                             style: TextStyle(fontSize: 24.0),
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.green.shade800,
                             onPrimary: Colors.white,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 16.0, horizontal: 24.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
@@ -126,15 +126,15 @@ class SoSPage extends StatelessWidget {
                               launchUrlString(url);
                             }
                           },
-                          icon: Icon(Icons.location_on_outlined),
-                          label: Text(
+                          icon: const Icon(Icons.location_on_outlined),
+                          label: const Text(
                             'Share Location via SMS',
                             style: TextStyle(fontSize: 24.0),
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.orange.shade800,
                             onPrimary: Colors.white,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 16.0, horizontal: 24.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
@@ -144,9 +144,9 @@ class SoSPage extends StatelessWidget {
                       }
                     },
                   ),
-                  SizedBox(height: 40.0),
+                  const SizedBox(height: 40.0),
                   // Guide at the bottom
-                  Text(
+                  const Text(
                     'You can use the SoS feature to call an ambulance or send a text to your family members with your location.',
                     style: TextStyle(
                         fontSize: 20.0,

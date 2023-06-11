@@ -8,7 +8,7 @@ class MentalSplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Card Buttons',
           style: TextStyle(
             color: Colors.white,
@@ -20,14 +20,14 @@ class MentalSplashScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomButton(
               title: 'Meditation',
               icon: Icons.spa,
-              color: Color(0xFFFC6C6C),
+              color: const Color(0xFFFC6C6C),
               onTap: () {
                 Navigator.push(
                   context,
@@ -35,11 +35,11 @@ class MentalSplashScreen extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             CustomButton(
               title: 'Journal',
               icon: Icons.book,
-              color: Color(0xFF5DA6FF),
+              color: const Color(0xFF5DA6FF),
               onTap: () {
                 Navigator.push(
                   context,
@@ -72,7 +72,7 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(16),
@@ -80,7 +80,7 @@ class CustomButton extends StatelessWidget {
             BoxShadow(
               color: color.withOpacity(0.4),
               blurRadius: 8,
-              offset: Offset(0, 4),
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -92,17 +92,17 @@ class CustomButton extends StatelessWidget {
               size: 32,
               color: Colors.white,
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Spacer(),
-            Icon(
+            const Spacer(),
+            const Icon(
               Icons.arrow_forward,
               size: 24,
               color: Colors.white,

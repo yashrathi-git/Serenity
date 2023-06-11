@@ -20,7 +20,7 @@ class _JournalScreenState extends State<JournalScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Journal'),
+        title: const Text('Journal'),
         backgroundColor: Colors.green,
       ),
       body: Container(
@@ -37,7 +37,7 @@ class _JournalScreenState extends State<JournalScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
+                      const Text(
                         'New Entry',
                         style: TextStyle(
                           fontSize: 24,
@@ -45,11 +45,11 @@ class _JournalScreenState extends State<JournalScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextField(
                         controller: _titleController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
                           labelText: 'Title',
                           labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
@@ -61,12 +61,12 @@ class _JournalScreenState extends State<JournalScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextField(
                         controller: _descriptionController,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         maxLines: 4,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Description',
                           labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
@@ -78,8 +78,8 @@ class _JournalScreenState extends State<JournalScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      Text(
+                      const SizedBox(height: 16),
+                      const Text(
                         'How was your mood today?',
                         style: TextStyle(
                           fontSize: 16,
@@ -87,7 +87,7 @@ class _JournalScreenState extends State<JournalScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -96,21 +96,21 @@ class _JournalScreenState extends State<JournalScreen> {
                           _buildMoodButton(2, '😄'),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
                           _saveEntry(uid);
                           _clearFields();
                         },
-                        child: Text('Save Entry'),
+                        child: const Text('Save Entry'),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.pink,
                           onPrimary: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          textStyle: TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          textStyle: const TextStyle(fontSize: 16),
                         ),
                       ),
                     ],
@@ -118,7 +118,7 @@ class _JournalScreenState extends State<JournalScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: _buildEntryList(uid),
@@ -141,7 +141,7 @@ class _JournalScreenState extends State<JournalScreen> {
       },
       icon: Text(
         emoji,
-        style: TextStyle(fontSize: 24),
+        style: const TextStyle(fontSize: 24),
       ),
       color: color,
     );
@@ -189,18 +189,18 @@ class _JournalScreenState extends State<JournalScreen> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         final entries = snapshot.data?.docs ?? [];
 
         if (entries.isEmpty) {
-          return Center(child: Text('No entries found.'));
+          return const Center(child: Text('No entries found.'));
         }
 
         return ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: entries.length,
           itemBuilder: (context, index) {
             final entry = entries[index].data() as Map<String, dynamic>;
@@ -221,10 +221,10 @@ class _JournalScreenState extends State<JournalScreen> {
               ),
               child: ListTile(
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 title: Text(
                   '$title : $formattedDate',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -232,7 +232,7 @@ class _JournalScreenState extends State<JournalScreen> {
                 ),
                 subtitle: Text(
                   description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 14,
                   ),
@@ -243,7 +243,7 @@ class _JournalScreenState extends State<JournalScreen> {
                     border: Border.all(color: Colors.white),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: _buildMoodEmoji(mood),
                 ),
               ),
@@ -281,10 +281,10 @@ class _JournalScreenState extends State<JournalScreen> {
       children: [
         Text(
           emoji,
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
-        SizedBox(width: 4),
-        Text(text, style: TextStyle(color: Colors.grey)),
+        const SizedBox(width: 4),
+        Text(text, style: const TextStyle(color: Colors.grey)),
       ],
     );
   }

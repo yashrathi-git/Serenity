@@ -53,7 +53,7 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
 
       // Show a success message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Form data uploaded successfully')),
+        const SnackBar(content: Text('Form data uploaded successfully')),
       );
     } catch (error) {
       // Show an error message
@@ -99,11 +99,11 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Medication Tracker'),
+        title: const Text('Medication Tracker'),
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Container(
             child: Column(
@@ -114,10 +114,10 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(0.0), // Remove the padding
+                    padding: const EdgeInsets.all(0.0), // Remove the padding
                     child: TextField(
                       controller: medicationNameController,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
                       ), // Set the text color and size
@@ -128,7 +128,7 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                           fontSize: 16.0,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color:
                                 Colors.red, // Set the border color when focused
                             width: 2.0,
@@ -149,7 +149,7 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
@@ -158,8 +158,8 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                   color: Colors.grey[900],
                   child: ListTile(
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    title: Text(
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    title: const Text(
                       'Reminder Time',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -173,9 +173,9 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                           selectedTime == null
                               ? 'Select time'
                               : 'Time: ${selectedTime!.format(context)}',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: const TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         // Text(
                         //   'Tap to select time',
                         //   style:
@@ -183,11 +183,11 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                         // ),
                       ],
                     ),
-                    trailing: Icon(Icons.access_time, color: Colors.green),
+                    trailing: const Icon(Icons.access_time, color: Colors.green),
                     onTap: _openTimePicker,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
@@ -196,8 +196,8 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                   color: Colors.grey[900],
                   child: ListTile(
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    title: Text(
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    title: const Text(
                       'Medication Reminders',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -209,32 +209,32 @@ class _MedicationRemindersScreenState extends State<MedicationRemindersScreen> {
                           selectedDate == null
                               ? 'From'
                               : 'Date: ${selectedDate.toString().substring(0, 10)}',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: const TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         // Text(
                         //   'Tap to select date',
                         //   style: TextStyle(fontSize: 14, color: Colors.grey),
                         // ),
                       ],
                     ),
-                    trailing: Icon(Icons.calendar_today, color: Colors.amber),
+                    trailing: const Icon(Icons.calendar_today, color: Colors.amber),
                     onTap: _openDatePicker,
                   ),
                 ),
                 ElevatedButton(
                   // Make it span the entire width
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     backgroundColor: Colors.purple[900],
                   ),
                   onPressed: _uploadFormData,
-                  child: Text('Create Reminder'),
+                  child: const Text('Create Reminder'),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 SizedBox(
                   child: ReminderListWidget(),
                   height: 500,

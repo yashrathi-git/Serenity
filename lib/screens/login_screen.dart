@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(
+          builder: (context) => const HomePage(
             justLoggedIn: true,
           ),
         ),
@@ -57,7 +57,7 @@ class LoginPage extends StatelessWidget {
       print(e.toString());
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (context) => const AlertDialog(
           title: Text('Error'),
           content: Text('Failed to sign in with Google.'),
         ),
@@ -74,7 +74,7 @@ class LoginPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(
+          builder: (context) => const HomePage(
             justLoggedIn: true,
           ),
         ),
@@ -88,19 +88,22 @@ class LoginPage extends StatelessWidget {
 
     final List<CarouselItem> carouselItems = [
       CarouselItem(
-        imagePath: 'assets/images/feature1.png',
-        title: 'Feature 1',
-        description: 'Description for Feature 1',
+        imagePath: 'assets/images/medic.png',
+        title: 'Medicine Reminder',
+        description:
+            'Never miss a dose again with our intuitive medicine reminder feature.',
       ),
       CarouselItem(
-        imagePath: 'assets/images/feature2.png',
-        title: 'Feature 2',
-        description: 'Description for Feature 2',
+        imagePath: 'assets/images/medi.jpg',
+        title: 'Meditate and Journal',
+        description:
+            'Take a moment for yourself and find inner peace with meditation and journaling. ',
       ),
       CarouselItem(
-        imagePath: 'assets/images/feature3.png',
-        title: 'Feature 3',
-        description: 'Description for Feature 3',
+        imagePath: 'assets/images/sos.png',
+        title: 'Get Support in Emergency',
+        description:
+            ' Connect with emergency services or reach out to your designated emergency contacts',
       ),
     ];
 
@@ -124,7 +127,7 @@ class LoginPage extends StatelessWidget {
               children: <Widget>[
                 const SizedBox(height: 40),
                 Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/3799666.png',
                   width: 200,
                   height: 100,
                 ),
@@ -134,7 +137,7 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'AlBrush',
                     fontSize: 70,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white,
                     shadows: [
                       Shadow(
@@ -160,29 +163,44 @@ class LoginPage extends StatelessWidget {
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           color: Colors.white.withOpacity(0.7),
-                          child: Column(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                item.imagePath,
-                                fit: BoxFit.cover,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                item.title,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                              Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Image.asset(
+                                    item.imagePath,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 5),
-                              Text(
-                                item.description,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.title,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      item.description,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -227,7 +245,7 @@ class CustomSignInButton extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -239,8 +257,8 @@ class CustomSignInButton extends StatelessWidget {
               height: 30.0,
               width: 30.0,
             ),
-            SizedBox(width: 8.0),
-            Text(
+            const SizedBox(width: 8.0),
+            const Text(
               'Sign in with Google',
               style: TextStyle(
                 fontSize: 16.0,

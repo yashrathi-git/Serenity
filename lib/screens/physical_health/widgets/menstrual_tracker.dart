@@ -117,7 +117,7 @@ class _MenstrualCycleTrackerScreenState
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HealthTipsScreen(),
+              builder: (context) => const HealthTipsScreen(),
             ),
           );
         },
@@ -131,11 +131,11 @@ class _MenstrualCycleTrackerScreenState
           ),
           elevation: MaterialStateProperty.all<double>(5),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Icon(
                 Icons.favorite,
                 color: Colors.red,
@@ -177,7 +177,7 @@ class _MenstrualCycleTrackerScreenState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HistoryScreen(),
+                  builder: (context) => const HistoryScreen(),
                 ),
               );
             },
@@ -365,7 +365,7 @@ class HealthTipsScreen extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FoodTipsScreen(),
+          builder: (context) => const FoodTipsScreen(),
         ));
   }
 
@@ -373,7 +373,7 @@ class HealthTipsScreen extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ExerciseTipsScreen(),
+          builder: (context) => const ExerciseTipsScreen(),
         ));
   }
 
@@ -381,7 +381,7 @@ class HealthTipsScreen extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => StressTipsScreen(),
+          builder: (context) => const StressTipsScreen(),
         ));
   }
 

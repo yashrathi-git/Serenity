@@ -75,7 +75,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text(
+        title: const Text(
           'Meditate',
           style: TextStyle(
             color: Colors.white,
@@ -95,7 +95,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   animatedTexts: meditationQuotes.map((quote) {
                     return RotateAnimatedText(
                       quote,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -109,19 +109,19 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   pause: const Duration(seconds: 1),
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               CircularCountDownTimer(
                 key: Key(
                     selectedTime.toString()), // Add a key to the timer widget
                 controller: _clockController,
                 isReverseAnimation: true,
-                ringColor: Color(0xFF0B0C19),
+                ringColor: const Color(0xFF0B0C19),
                 height: height,
                 width: width,
                 autoStart: false,
                 duration: selectedTime * 60,
                 isReverse: true,
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   color: Colors.white,
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   });
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               DropdownButton<int>(
                 value: selectedTime,
                 items: meditationTimes.map((time) {
@@ -143,7 +143,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                     value: time,
                     child: Text(
                       '$time min',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Colors.white, // Update the color to white
@@ -158,13 +158,13 @@ class _MeditationScreenState extends State<MeditationScreen> {
                           selectedTime = value!;
                         });
                       },
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Colors.white, // Update the color to white
                 ),
                 elevation: 3,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_drop_down,
                   color: Colors.white, // Update the icon color to white
                 ),

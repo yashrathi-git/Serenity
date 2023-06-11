@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Row(
+          title: const Row(
             children: [
               Text(
                 'Which Gender do you Identify As?',
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: Row(
+                title: const Row(
                   children: [
                     Text(
                       'Male',
@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                title: Row(
+                title: const Row(
                   children: [
                     Text(
                       'Female',
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                title: Row(
+                title: const Row(
                   children: [
                     Text(
                       'Prefer Not to Say',
@@ -251,7 +251,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home'),
+        backgroundColor: Colors.teal,
         actions: <Widget>[
           Builder(
             builder: (BuildContext context) {
@@ -261,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                     // Replace 'avatarUrl' with the URL of the user's avatar
                     FirebaseAuth.instance.currentUser?.photoURL ?? '',
                   ),
-                  radius: 15,
+                  radius: 18,
                 ),
                 onPressed: () {
                   Scaffold.of(context).openEndDrawer();
@@ -286,11 +287,11 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
-                      speed: const Duration(milliseconds: 100),
+                      speed: const Duration(milliseconds: 50),
                     ),
                   ],
                   totalRepeatCount: 1,
-                  pause: const Duration(milliseconds: 500),
+                  pause: const Duration(milliseconds: 100),
                   displayFullTextOnTap: true,
                   stopPauseOnTap: true,
                 ),
@@ -323,15 +324,15 @@ class _HomePageState extends State<HomePage> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: <Widget>[
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       DelayedDisplay(
                         delay: const Duration(milliseconds: 200),
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.warning,
                             color: Colors.amber,
                           ),
-                          title: Text(
+                          title: const Text(
                             'SoS',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
@@ -339,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 18,
                             ),
                           ),
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.grey,
                           ),
@@ -356,15 +357,15 @@ class _HomePageState extends State<HomePage> {
                                   : Colors.white,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       DelayedDisplay(
                         delay: const Duration(milliseconds: 300),
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.chat,
                             color: Colors.green,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Swasthya Sakhi',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
@@ -372,7 +373,7 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 18,
                             ),
                           ),
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.grey,
                           ),
@@ -380,7 +381,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChatScreen()),
+                                  builder: (context) => const ChatScreen()),
                             );
                           },
                           tileColor:
@@ -389,7 +390,7 @@ class _HomePageState extends State<HomePage> {
                                   : Colors.white,
                         ),
                       ),
-                      SizedBox(height: 360),
+                      const SizedBox(height: 360),
                       ListTile(
                         title: Container(
                           width: 60,
@@ -426,7 +427,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 16.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12.0),
@@ -434,7 +435,7 @@ class _HomePageState extends State<HomePage> {
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.3),
                           blurRadius: 6.0,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -447,7 +448,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -460,7 +461,7 @@ class _HomePageState extends State<HomePage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(width: 16.0),
+                            const SizedBox(width: 16.0),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -470,20 +471,20 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                                      color: Colors.amber[900],
                                     ),
                                   ),
-                                  SizedBox(height: 8.0),
+                                  const SizedBox(height: 8.0),
                                   Text(
                                     item.description,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.black,
                                     ),
                                   ),
-                                  SizedBox(height: 16.0),
+                                  const SizedBox(height: 16.0),
                                   ElevatedButton(
-                                    child: Text(
+                                    child: const Text(
                                       'Learn More',
                                       style: TextStyle(fontSize: 16.0),
                                     ),
@@ -496,7 +497,7 @@ class _HomePageState extends State<HomePage> {
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                       ),
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                         vertical: 12.0,
                                         horizontal: 24.0,
                                       ),
@@ -517,22 +518,22 @@ class _HomePageState extends State<HomePage> {
                 initialPage: 0,
                 enableInfiniteScroll: true,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enlargeCenterPage: true,
                 onPageChanged: (index, reason) {},
                 scrollDirection: Axis.horizontal,
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Expanded(
               child: ListView.builder(
                 itemCount: cardItems.length,
                 itemBuilder: (BuildContext context, int index) {
                   CardItem item = cardItems[index];
                   return Container(
-                    margin: EdgeInsets.all(10.0),
+                    margin: const EdgeInsets.all(10.0),
                     child: Card(
                       elevation: 4.0,
                       shape: RoundedRectangleBorder(
@@ -543,27 +544,34 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     item.title,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.blue,
                                     ),
                                   ),
-                                  SizedBox(height: 10.0),
+                                  const SizedBox(height: 10.0),
                                   Text(
                                     item.description,
-                                    style: TextStyle(fontSize: 14.0),
+                                    style: const TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  SizedBox(height: 20.0),
+                                  const SizedBox(height: 20.0),
                                   ElevatedButton(
-                                    child: Text(
+                                    child: const Text(
                                       'Learn More',
-                                      style: TextStyle(fontSize: 16.0),
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                     onPressed: () {
                                       launch(item.redirectLink);
@@ -574,7 +582,7 @@ class _HomePageState extends State<HomePage> {
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                       ),
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                         vertical: 12.0,
                                         horizontal: 24.0,
                                       ),
@@ -584,7 +592,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -611,11 +619,11 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: CupertinoTabBar(
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             // label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.health_and_safety),
             // label: 'Toolbox',
           ),

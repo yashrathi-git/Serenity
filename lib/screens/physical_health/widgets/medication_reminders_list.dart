@@ -18,7 +18,7 @@ class ReminderListWidget extends StatelessWidget {
               .toList();
 
           if (reminders.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No reminders found'),
             );
           }
@@ -47,7 +47,7 @@ class ReminderListWidget extends StatelessWidget {
                   ),
                   title: Text(
                     reminder.medicationName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: Colors.white,
@@ -58,12 +58,12 @@ class ReminderListWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Till: $formattedDate',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: const TextStyle(fontSize: 16, color: Colors.white),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Time: $formattedTime',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ],
                   ),
@@ -72,9 +72,9 @@ class ReminderListWidget extends StatelessWidget {
             },
           );
         } else if (snapshot.hasError) {
-          return Text('Error fetching reminders');
+          return const Text('Error fetching reminders');
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }

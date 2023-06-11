@@ -24,12 +24,12 @@ class MedicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Health Toolbox',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.amber[700], // Set the app bar color
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black, // Set the color of the back arrow
         ),
       ),
@@ -40,7 +40,7 @@ class MedicationScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Card(
                 color: Colors.blueAccent, // Set the card background color
                 shape: RoundedRectangleBorder(
@@ -48,7 +48,7 @@ class MedicationScreen extends StatelessWidget {
                 ),
                 elevation: 4,
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     'Medication Reminders',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -56,18 +56,18 @@ class MedicationScreen extends StatelessWidget {
                       color: Colors.white, // Set the title text color
                     ),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     'Set reminders for your medications',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white70, // Set the subtitle text color
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.medical_services,
                     color: Colors.white, // Set the leading icon color
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white, // Set the trailing icon color
                   ),
@@ -81,7 +81,7 @@ class MedicationScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Card(
                 color: Colors.purple, // Set the card background color
                 shape: RoundedRectangleBorder(
@@ -90,7 +90,7 @@ class MedicationScreen extends StatelessWidget {
 
                 elevation: 4,
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     'Meditation',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -98,18 +98,18 @@ class MedicationScreen extends StatelessWidget {
                       color: Colors.white, // Set the title text color
                     ),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     'Meditate to relax your mind and body',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white70, // Set the subtitle text color
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.spa,
                     color: Colors.white, // Set the leading icon color
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white, // Set the trailing icon color
                   ),
@@ -123,7 +123,7 @@ class MedicationScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Card(
                 color: Colors.green, // Set the card background color
                 shape: RoundedRectangleBorder(
@@ -131,7 +131,7 @@ class MedicationScreen extends StatelessWidget {
                 ),
                 elevation: 4,
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     'Journal',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -139,18 +139,18 @@ class MedicationScreen extends StatelessWidget {
                       color: Colors.white, // Set the title text color
                     ),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     'Journal your thoughts and feelings',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white70, // Set the subtitle text color
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.book,
                     color: Colors.white, // Set the leading icon color
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white, // Set the trailing icon color
                   ),
@@ -164,7 +164,7 @@ class MedicationScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               FutureBuilder<bool>(
                 future: _getUserGender(),
                 builder: (context, snapshot) {
@@ -176,7 +176,7 @@ class MedicationScreen extends StatelessWidget {
                       ),
                       elevation: 4,
                       child: ListTile(
-                        title: Text(
+                        title: const Text(
                           'Menstrual Cycle Tracker',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -184,7 +184,7 @@ class MedicationScreen extends StatelessWidget {
                             color: Colors.white, // Set the title text color
                           ),
                         ),
-                        subtitle: Text(
+                        subtitle: const Text(
                           'Track your menstrual cycle',
                           style: TextStyle(
                             fontSize: 14,
@@ -192,11 +192,11 @@ class MedicationScreen extends StatelessWidget {
                                 Colors.white70, // Set the subtitle text color
                           ),
                         ),
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.calendar_today,
                           color: Colors.white, // Set the leading icon color
                         ),
-                        trailing: Icon(
+                        trailing: const Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.white, // Set the trailing icon color
                         ),
@@ -205,14 +205,14 @@ class MedicationScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  MenstrualCycleTrackerScreen(),
+                                  const MenstrualCycleTrackerScreen(),
                             ),
                           );
                         },
                       ),
                     );
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 },
               ),

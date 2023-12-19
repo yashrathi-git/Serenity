@@ -17,7 +17,21 @@
 
 This Health and Digital App is designed to help users manage their health and well-being through a variety of features. The app was developed for a hackathon and aims to provide a comprehensive solution for users to track their health, receive advice, and stay organized.
 
+<p float="left">
+  <img src="https://github.com/drowsy-coder/Serenity/assets/57002207/1168e361-2503-4bd9-b407-2fb7be56f546" width="200" />
+  <img src="https://github.com/drowsy-coder/Serenity/assets/57002207/c0c9a889-d55f-4665-b49b-d68c0e8b9f9c" width="200" /> 
+  <img src="https://github.com/drowsy-coder/Serenity/assets/57002207/3c03905e-2271-4dad-a92d-609aded23afe" width="200" />
+</p>
+
+<p float="left">
+  <img src="https://github.com/drowsy-coder/Serenity/assets/57002207/5bf9d780-9a5d-44ca-9b00-e1c86bec8623" width="200" />
+  <img src="https://github.com/drowsy-coder/Serenity/assets/57002207/970d3b50-2ada-4d70-8a75-29e53db86e8d" width="200" /> 
+</p>
+
+
+
 ## Features
+
 
 ### Menstrual Tracker
 
